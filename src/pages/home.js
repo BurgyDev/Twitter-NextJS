@@ -2,6 +2,8 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import NewTweet from 'components/NewTweet'
 import Tweets from '../../components/Tweets'
+import prisma from 'lib/prisma'
+import { getTweets } from 'lib/data.js'
 
 export default function Home() {
   const { data: session, status } = useSession()
@@ -22,4 +24,15 @@ export default function Home() {
       <Tweets tweets={[{ content: 'test' }, { content: 'another' }]} />
     </>
   )
+}
+
+export async function getServerSideProps() {
+	let tweets = await getTweets(prisma)
+  tweets = JSON.parse(JSON.stringify(tweets))
+
+  return {
+    props: {
+      tweets,
+    },
+  }
 }
