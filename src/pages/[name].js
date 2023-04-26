@@ -6,7 +6,7 @@ import Tweets from 'components/Tweets'
 export default function UserProfile({ name, tweets }) {
   return (
     <>
-      <p className='text-center p-5'>User profile of {name}</p>
+      <p className='text-center p-5'>Espace Twitos de {name}</p>
       <Tweets tweets={tweets} />
     </>
   )
